@@ -10,17 +10,18 @@
     <mat-menu #menu="matMenu">
         <div class="p-3 divide-y divide-solid">
             <div class="pb-3 flex justify-between">
-                <span class="mr-16">{{itemsQuantity}} Item</span>
+                <span *ngIf="itemsQuantity === 1" class="mr-16">{{itemsQuantity}} Item</span>
+                <span *ngIf="itemsQuantity > 1" class="mr-16">{{itemsQuantity}} Items</span>
                 <a routerLink="cart">Ver Carrito</a>
             </div>
-            <div *ngIf="cart.items.length" class="py-3">
-                <div 
-                    *ngFor="let item of cart.items"
-                    class="flex justify-between font-light mb-2">
-                    {{item.name}} x {{item.quantity}}
-                    <span class="font-bold">{{ item.price | currency }}</span>
+                <div *ngIf="cart.items.length" class="py-3">
+                    <div
+                        *ngFor="let item of cart.items"
+                        class="flex justify-between font-light mb-2">
+                        {{item.name}} x {{item.quantity}}
+                        <span class="font-bold">{{ item.price | currency }}</span>
+                    </div>
                 </div>
-              </div>
             <div class="py-3 flex justify-between font-light">
                 Total:
                 <span class="font-bold">{{ getTotal(cart.items) | currency }}</span>

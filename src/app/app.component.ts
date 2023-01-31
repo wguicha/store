@@ -10,6 +10,7 @@ import { CartService } from './services/cart.service';
   `,
   styles: []
 })
+
 export class AppComponent implements OnInit {
   cart: Cart = { items: [] }
 
