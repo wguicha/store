@@ -38,4 +38,26 @@ export class CartService {
       duration: 3000
     });
   }
+
+  removeFromCart(item: CartItem): void{
+    const filterdItems =this.cart.value.items.filter(
+      (_item) => _item.id !== item.id
+    );
+
+    this.cart.next({ items: filterdItems })
+    this._snackBar.open('El Producto ha sido removido', 'Ok', { duration: 3000 })
+  }
+
+  onRemoveQuantity(item: CartItem): void{
+    this.cart.value.items.map((_item) =>{
+      if(_item.id === item.id) {
+        if(_item.quantity===1){
+          this.removeFromCart(_item)
+        } else {
+          _item.quantity--;
+        }
+      }
+      return _item;
+    });
+  }
 }
